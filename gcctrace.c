@@ -29,25 +29,25 @@ print_stack()
     int i = 0;
     int frames = backtrace(callstack, 128);
     char** strs = backtrace_symbols(callstack, frames);
-	struct utsname u_name;
+    struct utsname u_name;
 
-	if(NULL == strs)
-		return;
-	//for (i = 0; i < frames; ++i) {
-	//	printf(strs[i]);
-	//}
-	
-	if (!result) {
-		if((uname(&u_name) == -1)) {
-			fprintf(stderr, "%s:uname(2)\n", strerror(errno));
-			fprintf(stderr, "stack infomation may be error.\n");
-			fprintf(stderr, "check backtrace_symbols return info for your system in [%s-%s].\n", __FILE__, __func__);
-		} else if(strcmp(u_name.nodename, "ubuntu")) {
-			fprintf(stderr, "check backtrace_symbols return info for your system in [%s-%s].\n", __FILE__, __func__);
-		} 
+    if(NULL == strs)
+        return;
+    //for (i = 0; i < frames; ++i) {
+    //	printf(strs[i]);
+    //}
 
-		result = 1;
-	}
+    if (!result) {
+        if((uname(&u_name) == -1)) {
+            fprintf(stderr, "%s:uname(2)\n", strerror(errno));
+            fprintf(stderr, "stack infomation may be error.\n");
+            fprintf(stderr, "check backtrace_symbols return info for your system in [%s-%s].\n", __FILE__, __func__);
+        } else if(strcmp(u_name.nodename, "ubuntu")) {
+            fprintf(stderr, "check backtrace_symbols return info for your system in [%s-%s].\n", __FILE__, __func__);
+        } 
+
+        result = 1;
+    }
     //target = strtok(strs[2]," ");
     //for (i=0;i<3;i++)
     //    target = strtok(NULL," ");
@@ -55,25 +55,25 @@ print_stack()
     //    printf("| ");
     //printf("%d ",i);
     //puts(target);
-	
-	/* 
-	 * backtrace_symbols return info strs in ubuntu like:
-	 *		strs[2] = "./a.out(main+0x1e) [0x80488af]";
-	 */
-	target = strrchr((char *)strs[2], '/');
 
-	if(NULL == target) 
-		target = (char *)strs[2];
-	else
-		target++;
+    /* 
+     * backtrace_symbols return info strs in ubuntu like:
+     *		strs[2] = "./a.out(main+0x1e) [0x80488af]";
+     */
+    target = strrchr((char *)strs[2], '/');
+
+    if(NULL == target) 
+        target = (char *)strs[2];
+    else
+        target++;
 
     for(i = 0; i < offset; i++)
         printf("| ");
 
     printf("%d ",i);
     puts(target);
-    
-	free(strs);
+
+    free(strs);
 }
 
 void __attribute__((__no_instrument_function__))
