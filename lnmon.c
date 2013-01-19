@@ -3395,7 +3395,7 @@ int main(int argc, char **argv)
 #endif /* POWER */
 	int	smp_first_time =1;
 	int	proc_first_time =1;
-	pid_t	firstproc = (pid_t)0;
+	pid_t __attribute__((unused)) firstproc = (pid_t)0;
 	pid_t childpid = -1;
 	int ralfmode = 0;
 	char	pgrp[32];
@@ -3432,7 +3432,7 @@ int main(int argc, char **argv)
 	float fs_free;
 	float fs_size_used;
 	char cmdstr[256];
-	int disk_stats_read = 0;
+	int __attribute__((unused)) disk_stats_read = 0;
 	int updays, uphours, upmins;
 	float v2c_total;
 	float v2s_total;
@@ -3440,13 +3440,13 @@ int main(int argc, char **argv)
 	float v3s_total;
 	float v4c_total;
 	float v4s_total;
-	int room =1;
+	int __attribute__((unused)) room =1;
 	int errors=0;
 	WINDOW * padmem = NULL;
 	WINDOW * padlarge = NULL;
 	WINDOW * padpage = NULL;
 	WINDOW * padker = NULL;
-	WINDOW * padres = NULL;
+	WINDOW * __attribute__((unused)) padres = NULL;
 	WINDOW * padnet = NULL;
 	WINDOW * padneterr = NULL;
 	WINDOW * padnfs = NULL;
@@ -3458,7 +3458,7 @@ int main(int argc, char **argv)
 	WINDOW * padmap = NULL;
 	WINDOW * padtop = NULL;
 	WINDOW * padjfs = NULL;
-	WINDOW * padlpar = NULL;
+	WINDOW * __attribute__((unused)) padlpar = NULL;
 	WINDOW * padverb = NULL;
 	WINDOW * padhelp = NULL;
 
