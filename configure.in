@@ -1,0 +1,36 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.68])
+#------------------------------------------------------
+# TODO: Need to edit name and *.c to real project name.
+# change the checked header and checked function.
+#------------------------------------------------------
+AC_INIT([name], [0.5], [soarpenguin@gmail.com])
+AC_CONFIG_SRCDIR([*.c])
+#AC_CONFIG_HEADERS([config.h])
+
+#Initialize automake
+AM_INIT_AUTOMAKE(1.9 foreign)
+AM_SILENT_RULES([yes])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+AM_PROG_CC_C_O
+
+# Checks for libraries.
+
+# Checks for header files.
+AC_CHECK_HEADERS([stdlib.h string.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_CHECK_FUNCS([memmove memset strchr])
+
+AC_CONFIG_FILES([Makefile])
+
+AC_OUTPUT
