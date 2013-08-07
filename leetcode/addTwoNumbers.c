@@ -54,13 +54,23 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         h2 = h2->next;
     }
 
-    if (NULL == h1) {
+    if (NULL == h1 && NULL == h2) {
+        if (forward > 0) {
+            h1pre->next = (ListNode *) malloc(sizeof(ListNode));
+            h1pre->next->val = forward;
+            h1pre->next->next = NULL; 
+        }
+        goto done;
+    } else if (NULL == h1) {
         h1pre->next = h2;
         h2pre->next = NULL;
-    }
+    } 
+
+    h1pre = h1pre->next;
 
     while (forward > 0) {
         sum = h1pre->val + forward;
+        forward = 0;
 
         if (sum >= 10) {
             forward = sum / 10;
@@ -79,7 +89,7 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
             h1pre = h1pre->next;
         }
     }
-
+done:
     return l1;
 }
 
