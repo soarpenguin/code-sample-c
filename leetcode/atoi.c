@@ -6,11 +6,10 @@
 
 int
 atoi(const char *str) {
+    long long int result = 0;
     const char *tmp = str;
-    unsigned int retmp = 0;
-    int minus = 0;
+    int minus = 1;
     int base = 10;
-    int result = 0;
     int eindex = 0;
     int eminus = 0;
 
@@ -23,7 +22,7 @@ atoi(const char *str) {
     }
     
     if ('-' == *tmp) {
-        minus = 1;
+        minus = -1;
         tmp++;
     } else if ('+' == *tmp) {
         tmp++;
@@ -42,17 +41,21 @@ atoi(const char *str) {
         tmp++;
     }
     
+    // XXX attention for (result * base) > INT_MAX:
+    //      if result and base is int, then result * base < INT_MAX.
+    //      compiler use the "int" store the tmp result.
     while (*tmp >= '0' && *tmp <= '9') {
-        retmp = ((*tmp - '0') + result * base);
-        if ( !minus && retmp >= INT_MAX) {
-            return INT_MAX;
-        } else if (minus && -retmp <= INT_MIN) {
-            return INT_MIN;
-        } else {
-            result = result * base + *tmp - '0';
-            tmp++; 
-        }
+        result = ((*tmp - '0') + result * base);
+        tmp++;
     }
+
+    result *= minus;
+
+    if ( minus > 0 && result >= INT_MAX) {
+        return INT_MAX;
+    } else if (minus < 0 && result <= INT_MIN) {
+        return INT_MIN;
+    } 
 
     //if ('e' == *tmp || 'E' == *tmp) {
     //    tmp++;
@@ -73,16 +76,13 @@ atoi(const char *str) {
     //        }
     //    }
     //}
-    if (minus) {
-        result = -result;
-    }
 
-    return result;
+    return (int)result;
 }
 
 int
 main(int argc, char **argv) {
-    const char *str = "2147483648";
+    const char *str = "    10522545459";
 
     int result = atoi(str);
 
