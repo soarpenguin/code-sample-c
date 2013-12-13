@@ -1,20 +1,4 @@
 /*
- * =============================================================================
- *
- *       Filename:  rbtree.h
- *
- *    Description:  rbtree(Red-Black tree) implementation adapted from linux
- *                  kernel thus can be used in userspace c program.
- *
- *        Created:  09/02/2012 11:36:11 PM
- *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
- *        Company:  ICT ( Institute Of Computing Technology, CAS )
- *
- * =============================================================================
- */
-
-/*
   Red Black Trees
   (C) 1999  Andrea Arcangeli <andrea@suse.de>
   
