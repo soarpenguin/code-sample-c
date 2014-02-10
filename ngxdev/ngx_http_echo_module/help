@@ -1,0 +1,10 @@
+1. configure the addon module 
+	#./configure --prefix=/usr/local/tengine/ \
+	    --add-module=/home/ubuntu/cprogram/code-sample-c/ngxdev/ngx_http_echo_module
+
+2. update nginx.conf
+   add below location config to install dir conf/nginx.conf.
+        location /echo {
+			echo "Hello Nginx!";
+        }
+
