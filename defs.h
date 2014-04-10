@@ -18,3 +18,6 @@
 #endif
 #define CLAMP(val, min, max) MIN(MAX(min, val), max)
 
+#undef isdigit
+#define isdigit(a) ((unsigned char)((a) - '0') <= 9)
+
