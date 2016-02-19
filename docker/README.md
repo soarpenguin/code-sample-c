@@ -1,4 +1,5 @@
 ###Linux Namespace 有如下种类，官方文档在这里《Namespace in Operation》
+    http://lwn.net/Articles/531114/
 
     分类	系统调用参数	相关内核版本
     1. Mount namespaces	CLONE_NEWNS	Linux 2.4.19
